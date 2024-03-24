@@ -15,7 +15,7 @@
 </head>
 <body>
     
-    <header class="w-full h-{420px} bg-zinc-900 bg-home bg-cover bg-center">
+    <header class="w-full h-[420px] bg-zinc-900 bg-home bg-cover bg-center">
          <div class="w-full h-full flex flex-col justify-center items-center">
             <img src="./assets/hamb-1.png" 
             alt="logo Hamburgueria"
@@ -38,7 +38,6 @@
 
     <div id="menu">
         <main class="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-10 mx-auto max-w7xl px-2 mb-16">
-
             <div class="flex gap-2 ">
                 <img src="./assets/hamb-1.png" 
                 alt="Hamburguer Smash"
@@ -171,9 +170,10 @@
     </div>
 
     <!-- Pedidos -->
-    <div class="bg-black/60 w-full h-full fixed top-0 left-0 z-{99} flex items-center justify-center hidden" id="cart-modal">
-        <div class="bg-white px-5 rounded-md min-w-{90%} md:min-w{600px}">
+    <div class="bg-black/60 w-full h-full fixed top-0 left-0 z-[99]  items-center justify-center hidden" id="cart-modal">
+        <div class="bg-white p-5 rounded-md min-w-{90%} md:min-w[600px]">
             <h2 class="text-center font-bold text-2xl mb-2">Meu carrinho</h2>
+            
             <div id="cart-items" class="flex flex-col justify-between mb-2">
                 <p class="font-bold">Total: <span id="cart-total"> 0.00</span></p>
                 <p class="font-bold mt-4">Endereço de Entrega:</p>

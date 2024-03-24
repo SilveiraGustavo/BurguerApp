@@ -13,6 +13,7 @@ let Cart = []
 
 cartBtn.addEventListener("click", function() {
     cartModal.style.display = "flex"
+    updateCart();
 })
 cartModal.addEventListener("click", function(event){
     if(event.target === cartModal){
@@ -25,21 +26,52 @@ closeModalBtn.addEventListener("click", function(){
 
 menu.addEventListener("click", function(event){
     let parentButton = event.target.closest(".add-to-card-btn")
-
     if(parentButton){
         const name = parentButton.getAttribute("data-name")
-        const price = parceFloat(parentButton.getAttribute("data-price"))
-
-        addTocart(name, price)
+        const price = parseFloat(parentButton.getAttribute("data-price"))
+        addTocart(name,price)
     }
-    
 
 })
 
 function addTocart(name, price){
-    Cart.push({
-        name,
-        price,
-        quantidade: 1,
+    const ItemExistente = Cart.find(item => item.name === name)
+    if(ItemExistente){
+        ItemExistente.quantidade += 1
+    }else{
+        Cart.push({
+            name,
+            price,
+            quantidade: 1,
+        })
+    }
+   updateCart()
+}
+
+function updateCart(){
+    cartItemsContainer.innerHTML = "";
+    let valor_total = 0;
+    Cart.forEach(item => {
+        const cartElement = document.createElement("div");
+        cartElement.classList.add("flex", "justify-between", "mb-4", "flex-col")
+        cartElement.innerHTML = `
+        <div class="flex items-center justify-between"> 
+            <div>
+                <div>
+                    <p class="font-bold">${item.name}</p>
+                    <p>Qtd: ${item.quantidade}</p>
+                    <p class="font-medium mt-2"> R$ ${item.price.toFixed(2)}</p>
+                </div>
+
+                <button>
+                    Remover
+                </button>
+
+            </div>
+        </div>
+        `
+        valor_total += item.price * item.quantidade;
+        cartItemsContainer.appendChild(cartElement)
     })
+    cartTotal.textContent = valor_total;
 }
