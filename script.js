@@ -37,7 +37,7 @@ menu.addEventListener("click", function(event){
 function addTocart(name, price){
     const ItemExistente = Cart.find(item => item.name === name)
     if(ItemExistente){
-        ItemExistente.quantidade += 1
+        ItemExistente.quantidade += 1;
     }else{
         Cart.push({
             name,
@@ -79,22 +79,24 @@ function updateCart(){
 
 cartItemsContainer.addEventListener("click", function(event){
     if(event.target.classList.contains("remove-btn")){
-        removeCart(name)
+        const name = event.target.getAttribute("data-name")
+        removeItemCart(name);
     }
 })
 
-function removeCart(name){
+function removeItemCart(name){
     const index = Cart.findIndex(item => item.name === name);
+
     if(index !== -1){
         const item = Cart[index];
         if(item.quantidade > 1){
-            item.quantidade -= 1;
+            item.quantidade -=1;
             updateCart();
             return;
         }
-        Cart.splice(index, 1);
-        updateCart();
     }
+    Cart.splice(index, 1);
+    updateCart();
 }
 
 addresInput.addEventListener("input", function(event){
@@ -109,7 +111,7 @@ checkoutBtn.addEventListener("click", function(){
     const isOpen = checkOpen();
     if(!isOpen){
         Toastify({
-            text: "Restaurante Fechado 😭",
+            text: "Restaurante Fechado ☹️",
             duration: 3000,
             close: true,
             gravity: "top",
